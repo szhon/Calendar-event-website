@@ -1,0 +1,273 @@
+<html>
+
+<title></title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.bootcss.com/bootstrap-select/1.12.1/css/bootstrap-select.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="./style.css">
+
+
+<!-- HTML -->
+
+<body>
+    <!--- login --->
+    <div id='login'>
+        <h3> Welcome to ...</h3>
+        <div>
+            <label for='username'>Username: </label>
+            <input type='text' id='username'>
+        </div>
+        <div>
+            <label for='password'>Password: </label>
+            <input type='password' id='password'>
+        </div>
+        <div>
+            <button type='button' class='btn btn-primary sign_in' onClick="sign_in(event)">Sign in</button>
+            <button type='button' class='btn btn-primary sign_up' onClick="turn_to_signup(event)">Sign up</button>
+        </div>
+
+        <h4>ps. Can login with username=sdf and password=sdf</h4>
+
+
+    </div>
+
+    <!--- sign up -->
+    <div id='signup'>
+
+        <h3> Create a new account</h3>
+        <div>
+            <label for='username_signup'>User name: </label>
+            <input type='text' id='username_signup'>
+        </div>
+        <div>
+            <label for='password_1'>Password: </label>
+            <input type='password' id='password_1'>
+        </div>
+        <div>
+            <label for='password_2'>Confirm Password: </label>
+            <input type='password' id='password_2'>
+        </div>
+        <div>
+            <button type='button' class='btn btn-primary sign_up' onClick="sign_up(event)">Sign up</button>
+        </div>
+        <div>
+            <p id='return' onClick='return_login(event)'>Return to User Login Page</p>
+        </div>
+    </div>
+
+    <!--- Left Side Content-->
+    <div class="tab">
+        <button class="tablinks active" id='filter_btn' onclick="left_content(event, 'filter')">My event<p></p> preferences</button>
+        <button class="tablinks" onclick="left_content(event, 'ranking')">Exercise<p></p> ranking</button>
+        <button class="tablinks" onclick="left_content(event, 'post')">My new<p></p> event</button>
+        <!--<button id='control_left' class="tablinks" onclick='control_left_content(event)'>&lt &lt &lt</button>-->
+    </div>
+
+    <div id="filter" class="tabcontent active">
+        <h3>Filter</h3>
+        <p>Filter the events with the following criteria</p>
+
+        <form>
+            <div class='form-group'>
+
+                <label for="filter_start_time">Start: </label>
+                <input type="time" id="filter_start_time" class="form-control">
+                <br>
+                <label for="filter_end_time">End: </label>
+                <input type="time" id="filter_end_time" class="form-control">
+                <br>
+                <label for="event_type">Event Type:</label>
+                <select class="selectpicker" multiple id="filter_event_type">
+          <option>All</option>
+          <option>Sports</option>
+          <option>Picnic</option>
+          <option>Home Party</option>
+          <option>Tea Talk</option>
+        </select>
+                <br>
+                <br>
+                <label for="filter_event_intensity">Exercise Intensity:</label>
+                <select class="selectpicker" multiple id="filter_event_intensity">
+          <option>All</option>
+          <option>Light</option>
+          <option>Moderate</option>
+          <option>Vigorous</option>
+        </select>
+                <br>
+                <br>
+                <label for="event_participants">Number of participants:</label>
+                <select class="selectpicker" multiple id="filter_event_participants">
+          <option>All</option>
+          <option>1-5</option>
+          <option>6-10</option>
+          <option>10-15</option>
+          <option>15-20</option>
+          <option>20-25</option>
+          <option>25-30</option>
+          <option>30+</option>
+        </select>
+            </div>
+        </form>
+        <div style='padding-bottom: 10px'>
+            <button type="button" class="btn btn-info" onClick="filter_event(event)">Filter</button>
+        </div>
+
+    </div>
+
+    <div id="ranking" class="tabcontent">
+        <h3>Ranking</h3>
+        <p>the Top Five Active Users based on the activities they participated in!</p>
+        <!--<p style='font-size: 12px; color:red'>ps. Can change the title ... Can explain what the scores stands for</p>-->
+    </div>
+
+    <div id="post" class="tabcontent">
+        <h3>Post Your Event</h3>
+
+        <form>
+            <div class="form-group">
+                <!--- input title -->
+                <label for="event_theme">Event Theme</label>
+                <input type="text" class="form-control" id="event_theme" placeholder="Your Event Theme">
+
+                <!-- time and place -->
+                <label for="date">Date: </label>
+                <input type="date" id="date" class="form-control">
+                <label for="start_time">Start: </label>
+                <input type="time" id="start_time" class="form-control">
+                <label for="end_time">End: </label>
+                <input type="time" id="end_time" class="form-control">
+                <label for="event_location">Location</label>
+                <input type="text" class="form-control" id="event_location" placeholder="Location">
+
+                <!-- kind -->
+                <label for="event_type">Select An Event Type</label>
+                <select class="form-control" id="event_type">
+          <option>---</option>
+          <option>Sports</option>
+          <option>Picnic</option>
+          <option>Home Party</option>
+          <option>Tea Talk</option>
+        </select>
+
+                <!-- intensity -->
+                <label for="event_intensity">Select the Intensity</label>
+                <select class="form-control" id="event_intensity">
+          <option>Light</option>
+          <option>Moderate</option>
+          <option>Vigorous</option>
+        </select>
+
+                <!--- expected number of participants FIXME: Or specify-->
+                <label for="event_participants">Number of participants</label>
+                <select class="form-control" id="event_participants">
+          <option>1-5</option>
+          <option>6-10</option>
+          <option>10-15</option>
+          <option>15-20</option>
+          <option>20-25</option>
+          <option>25-30</option>
+          <option>30+</option>
+        </select>
+
+                <!--- introduction -->
+                <label for="event_description">Descrption and Details</label>
+                <textarea class="form-control description_textbox" id="event_description" rows="3"></textarea>
+
+                <!-- contact -->
+                <label for="event_contact">Contact</label>
+                <input type="text" class="form-control" id="event_contact" placeholder="E.g.Email/Groupme/Phone">
+            </div>
+        </form>
+        <div style='padding-bottom: 20px'>
+            <button type="button" class="btn btn-info" onClick="post_event(event)">Submit</button>
+        </div>
+    </div>
+
+    <!--- Calendar in the middle -->
+    <div id='cldFrame'>
+        <div id="cldBody">
+            <table id='cld_table'>
+                <thead>
+                    <tr>
+                        <td colspan="7">
+                            <div id="top">
+                                <span id="left">&lt;</span>
+                                <span id="topDate"></span>
+                                <span id="right">&gt;</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="week">
+                        <td>Sunday</td>
+                        <td>Monday</td>
+                        <td>Tuesday</td>
+                        <td>Wednesday</td>
+                        <td>Thursday</td>
+                        <td>Friday</td>
+                        <td>Saturday</td>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+            <h4 style="color: #006699">Click the date button on the calendar to see what events are held on that day.</h4>
+        </div>
+
+    </div>
+
+    <!-- Event List on the right -->
+    <div id="eventlist">
+        <ul class="nav nav-tabs">
+            <li class="active" id='event_tab'><a href="#menu1" id='Event_html' data-toggle="tab" onclick="resetcurtab('Events')">Events</a>
+            </li>
+            <li id='backpack_tab'><a href="#home" data-toggle="tab" id="Backpack_html" onclick="resetcurtab('Backpack')">Backpack</a></li>
+            <li id='register_tab'><a href="#registered" data-toggle="tab" id="Registered_html" onclick="resetcurtab('Registered')">Registered</a></li>
+            <span class='description_hint'>
+            You can click or use the up and down keys to move through the event options.
+            <p id='description_words'>
+            You can click or using left key to add Events to your Backpack.
+            </p>
+        </span>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane container">
+                <div style="position:absolute;bottom:5px;text-align:center;">
+                    <button type="button" class="btn btn-warning" onClick="AddSelected()">Register Selected</button>
+                    <button type="button" class="btn btn-warning" onClick="RegisterAll()">Register All</button>
+                </div>
+
+            </div>
+
+            <div class="tab-pane container active" id="menu1">
+            </div>
+
+            <div class="tab-pane container" id="registered">
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+
+<!-- JS -->
+<script src='./jquery.min.js'></script>
+<script src='./script.js'></script>
+
+</html>
